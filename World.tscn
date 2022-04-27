@@ -325,6 +325,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
 frames = SubResource( 12 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -371,6 +372,7 @@ script = ExtResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Ennemy"]
 frames = SubResource( 24 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy"]

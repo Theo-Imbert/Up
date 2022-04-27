@@ -1,5 +1,6 @@
 extends Node2D
 
+"lol"
 
 var pos_last_platform := Vector2(0,-50)
 var render_distance := 80
