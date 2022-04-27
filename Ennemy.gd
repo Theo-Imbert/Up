@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 onready var ground_detection = $Position2D/Ground_detection
 onready var wall_detection = $Position2D/Wall_detection
-
+#This is a test
 var going_dir = Vector2.RIGHT
 
 const WALK_FORCE = 700
