@@ -296,7 +296,7 @@ collision_mask = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Portal1"]
 frames = SubResource( 16 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal1"]
@@ -310,7 +310,7 @@ collision_mask = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Portal2"]
 frames = SubResource( 16 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal2"]
@@ -325,7 +325,6 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
 frames = SubResource( 12 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -372,7 +371,6 @@ script = ExtResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Ennemy"]
 frames = SubResource( 24 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy"]
@@ -391,6 +389,125 @@ shape = SubResource( 26 )
 position = Vector2( 5, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy/Position2D/Wall_detection"]
+shape = SubResource( 27 )
+
+[node name="Ennemy2" type="KinematicBody2D" parent="." groups=["laser_kill"]]
+position = Vector2( -51.852, -10.9134 )
+z_index = 2
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Ennemy2"]
+frames = SubResource( 24 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy2"]
+position = Vector2( 0, 2 )
+shape = SubResource( 25 )
+
+[node name="Position2D" type="Position2D" parent="Ennemy2"]
+
+[node name="Ground_detection" type="Area2D" parent="Ennemy2/Position2D"]
+position = Vector2( 5, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy2/Position2D/Ground_detection"]
+shape = SubResource( 26 )
+
+[node name="Wall_detection" type="Area2D" parent="Ennemy2/Position2D"]
+position = Vector2( 5, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy2/Position2D/Wall_detection"]
+shape = SubResource( 27 )
+
+[node name="Ennemy3" type="KinematicBody2D" parent="." groups=["laser_kill"]]
+position = Vector2( -43.852, -20.9134 )
+z_index = 2
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Ennemy3"]
+frames = SubResource( 24 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy3"]
+position = Vector2( 0, 2 )
+shape = SubResource( 25 )
+
+[node name="Position2D" type="Position2D" parent="Ennemy3"]
+
+[node name="Ground_detection" type="Area2D" parent="Ennemy3/Position2D"]
+position = Vector2( 5, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy3/Position2D/Ground_detection"]
+shape = SubResource( 26 )
+
+[node name="Wall_detection" type="Area2D" parent="Ennemy3/Position2D"]
+position = Vector2( 5, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy3/Position2D/Wall_detection"]
+shape = SubResource( 27 )
+
+[node name="Ennemy4" type="KinematicBody2D" parent="." groups=["laser_kill"]]
+position = Vector2( -25.852, -19.9134 )
+z_index = 2
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Ennemy4"]
+frames = SubResource( 24 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy4"]
+position = Vector2( 0, 2 )
+shape = SubResource( 25 )
+
+[node name="Position2D" type="Position2D" parent="Ennemy4"]
+
+[node name="Ground_detection" type="Area2D" parent="Ennemy4/Position2D"]
+position = Vector2( 5, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy4/Position2D/Ground_detection"]
+shape = SubResource( 26 )
+
+[node name="Wall_detection" type="Area2D" parent="Ennemy4/Position2D"]
+position = Vector2( 5, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy4/Position2D/Wall_detection"]
+shape = SubResource( 27 )
+
+[node name="Ennemy5" type="KinematicBody2D" parent="." groups=["laser_kill"]]
+position = Vector2( -31.852, -10.9134 )
+z_index = 2
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Ennemy5"]
+frames = SubResource( 24 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy5"]
+position = Vector2( 0, 2 )
+shape = SubResource( 25 )
+
+[node name="Position2D" type="Position2D" parent="Ennemy5"]
+
+[node name="Ground_detection" type="Area2D" parent="Ennemy5/Position2D"]
+position = Vector2( 5, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy5/Position2D/Ground_detection"]
+shape = SubResource( 26 )
+
+[node name="Wall_detection" type="Area2D" parent="Ennemy5/Position2D"]
+position = Vector2( 5, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ennemy5/Position2D/Wall_detection"]
 shape = SubResource( 27 )
 
 [node name="Laser" type="Position2D" parent="."]
