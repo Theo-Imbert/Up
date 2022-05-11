@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Ennemy.gd" type="Script" id=1]
+[ext_resource path="res://Images/Ennemy.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 40, 40, 40 )
+
+[sub_resource type="SpriteFrames" id=24]
+animations = [ {
+"frames": [ SubResource( 22 ), SubResource( 23 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 2, 2 )
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 1, 3 )
+
+[node name="Ennemy" type="KinematicBody2D" groups=["laser_kill"]]
+position = Vector2( -43.852, -10.9134 )
+z_index = 2
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 24 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 25 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="Ground_detection" type="Area2D" parent="Position2D"]
+position = Vector2( 5, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/Ground_detection"]
+shape = SubResource( 26 )
+
+[node name="Wall_detection" type="Area2D" parent="Position2D"]
+position = Vector2( 5, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/Wall_detection"]
+shape = SubResource( 27 )

@@ -1,31 +1,41 @@
 extends Node2D
 
-"lol"
-
-var pos_last_platform := Vector2(0,-50)
-var render_distance := 80
-var next_platform_distance := 60
-var angle_random = PI/2
-var distance_random := 0.3
-
 var vitesse_laser := 0
-
-var PLATFORM := preload("res://Platform.tscn") 
 
 onready var player = $Player
 onready var portal1 = $Portal1
+
+const l = 8
+
+var button_activated = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	move_portal1($Portal1.position)
+	move_portal2($Portal2.position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	random_platform_generation()
+	check_button_activation()
 
 func _physics_process(delta):
 	kill_laser(delta)
+
+
+func check_button_activation():
+	var new_button_activation = false
+	for button in get_tree().get_nodes_in_group("Button"):
+		if button.activated:
+			new_button_activation = true
+			break
 	
+	if new_button_activation != button_activated:
+		button_activated = new_button_activation
+		if button_activated:
+			$TileMap.activate_platform()
+		else:
+			$TileMap.reset_platform()
 
 func kill_laser(delta):
 	$Laser.position.y -= vitesse_laser*delta
@@ -35,23 +45,10 @@ func kill_laser(delta):
 		if node.position.y > $Laser.position.y:
 			node.queue_free()
 	
-	
+	for node in get_tree().get_nodes_in_group("laser_restart"):
+		if node.position.y > $Laser.position.y:
+			get_tree().reload_current_scene()
 
-func random_platform_generation():
-	#si au dessus d'un seuil generer platforme pour l'instant on en genère une
-	if player.position.y-pos_last_platform.y < render_distance:
-		generate_next_platform()
-
-func generate_next_platform():
-	# utilise pos last platform pour générer la suivante
-	var new_position = rand_range(1-distance_random,1+distance_random)*next_platform_distance * Vector2(0,-1).rotated(rand_range(-angle_random,angle_random)) + pos_last_platform
-	create_platform(new_position,randi()%5+3)
-	pos_last_platform = new_position
-
-func create_platform(pos:Vector2,dim:int):
-	var platform = PLATFORM.instance()
-	add_child(platform)
-	platform.instantiate(pos,dim)
 
 # PORTAL
 

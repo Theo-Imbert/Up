@@ -40,7 +40,7 @@ func change_state(new_state)->void:
 	State = new_state
 
 func _physics_process(delta):
-		
+
 	if State == CONTROL:
 		
 		manage_looking_dir()
