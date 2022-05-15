@@ -4,20 +4,15 @@ extends Area2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var activated = false
-
+var going_position:Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	going
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not(get_overlapping_bodies().empty()):
-		$Timer.start()
-		activated = true
-
-
-func _on_Timer_timeout():
-	activated = false
+	$Tween.interpolate_property(self, "position",start_pos, new_going_pos, moving_time/2,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	yield($Tween,"tween_completed")

@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
 
-const WALK_FORCE = 600
-const WALK_MAX_SPEED = 170
-const FALL_MAX_SPEED = 250
+const WALK_FORCE = 200
+const WALK_MAX_SPEED = 150
+const FALL_MAX_SPEED = 230
 const STOP_FORCE = 1300
-const JUMP_SPEED = 250
+const JUMP_SPEED = 210
 const MASS = 8
 
 const DASH_FORCE = 1200
@@ -23,6 +23,8 @@ var velocity = Vector2(0,0)
 var was_on_floor = false
 
 var last_key_pressed = Vector2.RIGHT
+
+var nb_jump := 1
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -49,14 +51,14 @@ func _physics_process(delta):
 		if is_on_floor():
 			walk = WALK_FORCE *(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
 		else:
-			walk = WALK_FORCE/2 *(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
+			walk = WALK_FORCE *(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
 		# Slow down the player if they're not trying to move.
 		if abs(walk) < WALK_FORCE * 0.2:
 			if is_on_floor():
 				# The velocity, slowed down a bit, and then reassigned.
 				velocity.x = move_toward(velocity.x, 0, STOP_FORCE * delta)
 			else:
-				velocity.x = move_toward(velocity.x, 0, STOP_FORCE / 5 * delta)
+				velocity.x = move_toward(velocity.x, 0, STOP_FORCE/5 * delta)
 		else:
 			velocity.x += walk * delta
 		# Clamp to the maximum horizontal movement speed.
@@ -69,13 +71,16 @@ func _physics_process(delta):
 		# Move based on the velocity and snap to the ground.
 		velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)
 		
-		if (is_on_floor() or 1) and Input.is_action_just_pressed("ui_up"):
+		if (is_on_floor() or nb_jump>0) and Input.is_action_just_pressed("ui_up"):
 			velocity.y = -JUMP_SPEED
-			
-			create_jump_particles()
+			nb_jump -= 1
+			#create_jump_particles()
 		
-		if Input.is_action_just_pressed("ui_dash"):
-			change_state(DASH)
+		if is_on_floor():
+			nb_jump = 1
+		
+#		if Input.is_action_just_pressed("ui_dash"):
+#			change_state(DASH)
 			
 		# Portal
 		var room = get_parent()
@@ -100,7 +105,7 @@ func _process(delta):
 	# jumping particules
 	if is_on_floor():
 		if not(was_on_floor):
-			_land()
+			#_land()
 			was_on_floor= true 
 	else:
 		was_on_floor = false

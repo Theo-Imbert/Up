@@ -1,6 +1,6 @@
 extends Node2D
 
-var vitesse_laser := 0
+#var vitesse_laser := 0
 
 onready var player = $Player
 onready var portal1 = $Portal1
@@ -19,8 +19,8 @@ func _ready():
 func _process(delta):
 	check_button_activation()
 
-func _physics_process(delta):
-	kill_laser(delta)
+#func _physics_process(delta):
+#	kill_laser(delta)
 
 
 func check_button_activation():
@@ -37,29 +37,36 @@ func check_button_activation():
 		else:
 			$TileMap.reset_platform()
 
-func kill_laser(delta):
-	$Laser.position.y -= vitesse_laser*delta
-	
-	#need to be in group laser_kill
-	for node in get_tree().get_nodes_in_group("laser_kill"):
-		if node.position.y > $Laser.position.y:
-			node.queue_free()
-	
-	for node in get_tree().get_nodes_in_group("laser_restart"):
-		if node.position.y > $Laser.position.y:
-			get_tree().reload_current_scene()
+#func kill_laser(delta):
+#	$Laser.position.y -= vitesse_laser*delta
+#
+#	#need to be in group laser_kill
+#	for node in get_tree().get_nodes_in_group("laser_kill"):
+#		if node.position.y > $Laser.position.y:
+#			node.queue_free()
+#
+#	for node in get_tree().get_nodes_in_group("laser_restart"):
+#		if node.position.y > $Laser.position.y:
+#			get_tree().reload_current_scene()
 
 
-# PORTAL
+# PORTALf
 
 var disable_1 = false
 var disable_2 = false
 
 func move_portal1(new_position:Vector2):
-	$Portal1.position = new_position
+	try_move_portal($Portal1,new_position)
 
 func move_portal2(new_position:Vector2):
-	$Portal2.position = new_position
+	try_move_portal($Portal2,new_position)
+
+func try_move_portal(portal:Node2D,new_position:Vector2)->bool:
+	var new_tile = Vector2(int(new_position.x/l),int(new_position.y/l))
+	if $TileMap.get_cellv(new_tile) != -1 and $TileMap.get_collision_layer_bit($TileMap.get_cellv(new_tile)):
+		return false
+	portal.position = Vector2(int(new_position.x/l)*l,int(new_position.y/l)*l)
+	return true
 
 func _on_Portal1_body_entered(body):
 	if not(disable_1):
@@ -76,3 +83,9 @@ func _on_Portal2_body_entered(body):
 
 func _on_Portal2_body_exited(body):
 	disable_2 = false
+
+func _on_Restart_pressed():
+	restart()
+
+func restart():
+	get_tree().reload_current_scene()

@@ -62,9 +62,7 @@ func manage_facing_dir():
 		$Position2D.position = Vector2(-9,0)
 
 func facing_wall()->bool:
-	print(wall_detection.get_overlapping_bodies())
 	return not(wall_detection.get_overlapping_bodies().empty())
 
 func facing_ground()->bool:
-	print(ground_detection.get_overlapping_bodies())
 	return not(ground_detection.get_overlapping_bodies().empty())

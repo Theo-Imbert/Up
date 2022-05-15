@@ -48,7 +48,7 @@ anims/Horizontal = SubResource( 2 )
 anims/Vertical = SubResource( 5 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -8 )
+position = Vector2( -8, 0 )
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 texture = ExtResource( 2 )

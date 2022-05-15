@@ -47,8 +47,6 @@ func create_scene():
 		
 		if type == button:
 			general_instantiate(BUTTON,tile)
-	print(cells_disable_platform)
-	print(cells_enable_platform)
 
 func general_instantiate(obj,tile)->Node2D:
 	 # erasing prev platform

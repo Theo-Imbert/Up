@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Images/laser_head.png" type="Texture" id=1]
+[ext_resource path="res://Images/laser.png" type="Texture" id=2]
+
+[node name="Laser" type="Position2D"]
+position = Vector2( 0, 31 )
+scale = Vector2( 31, 1 )
+
+[node name="Laser" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[node name="LaserHead2" type="Sprite" parent="Laser"]
+position = Vector2( -4.12903, 0 )
+scale = Vector2( 0.0322581, 1 )
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="LaserHead" type="Sprite" parent="Laser"]
+position = Vector2( 4.12903, 0 )
+scale = Vector2( 0.0322581, 1 )
+texture = ExtResource( 1 )

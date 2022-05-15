@@ -9,6 +9,7 @@ onready var collision_shape = $KinematicBody2D/CollisionShape2D
 
 func _ready():
 	set_dim(dim)
+	$AnimationPlayer.advance(randf())
 
 func _apply_dim():
 	var x = l*dim
