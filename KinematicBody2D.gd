@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
 
-const WALK_FORCE = 200
-const WALK_MAX_SPEED = 150
-const FALL_MAX_SPEED = 230
+const WALK_FORCE = 190
+const WALK_MAX_SPEED = 110
+const FALL_MAX_SPEED = 200
 const STOP_FORCE = 1300
-const JUMP_SPEED = 210
+const JUMP_SPEED = 180
 const MASS = 8
 
 const DASH_FORCE = 1200
@@ -58,7 +58,7 @@ func _physics_process(delta):
 				# The velocity, slowed down a bit, and then reassigned.
 				velocity.x = move_toward(velocity.x, 0, STOP_FORCE * delta)
 			else:
-				velocity.x = move_toward(velocity.x, 0, STOP_FORCE/5 * delta)
+				velocity.x = move_toward(velocity.x, 0, STOP_FORCE/4 * delta)
 		else:
 			velocity.x += walk * delta
 		# Clamp to the maximum horizontal movement speed.
